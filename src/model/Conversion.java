@@ -24,28 +24,30 @@ public class Conversion extends JFrame implements ActionListener {
 
     public Conversion() throws IOException {
         super("The Conversion Calculator");
+        setStyle();
+    }
+
+    private void setStyle() throws IOException {
+        Sounds sounds = new Sounds();
+        sounds.playSound("Elevator-music");
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocation(500, 250);
         this.setPreferredSize(new Dimension(600, 400));
         ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
         setLayout(null);
-        Sounds sounds = new Sounds();
-        sounds.playSound("Elevator-music");
-
 
         BufferedImage myPicture = ImageIO.read(getClass().getResource("/model/picture/mathsymbol.png"));
 
-        Image scaleImage = new ImageIcon(myPicture).getImage().getScaledInstance(800, 500,Image.SCALE_DEFAULT);
+        Image scaleImage = new ImageIcon(myPicture).getImage().getScaledInstance(800, 500, Image.SCALE_DEFAULT);
         JLabel picLabel = new JLabel(new ImageIcon(scaleImage));
-        picLabel.setSize(600,400);
+        picLabel.setSize(600, 400);
         setContentPane(picLabel);
         displayText();
         setVisible(true);
-
     }
 
-    public void displayText()  throws IOException {
+    public void displayText() throws IOException {
 
         try {
             String theURL = "https://www.ugrad.cs.ubc.ca/~cs210/2018w1/welcomemsg.html";
@@ -59,7 +61,7 @@ public class Conversion extends JFrame implements ActionListener {
             }
             web_label = new JLabel(String.valueOf(sb));
             web_label.setBounds(100, 25, 415, 30);
-            web_label.setFont(new Font("Serif", Font.BOLD,20));
+            web_label.setFont(new Font("Serif", Font.BOLD, 20));
             Border border = BorderFactory.createBevelBorder(1, Color.black, Color.white);
             web_label.setBorder(border);
             add(web_label);
@@ -87,8 +89,8 @@ public class Conversion extends JFrame implements ActionListener {
             JButton btn_2 = new JButton("View Conversion History");
             btn_2.setFont(new Font("Serif", Font.BOLD, 15));
 
-            btn.setActionCommand("myButton");
-            btn_2.setActionCommand("myButton2");
+            btn.setActionCommand("Conversion");
+            btn_2.setActionCommand("Conversion History");
 
 
             btn.addActionListener(this);
@@ -100,37 +102,25 @@ public class Conversion extends JFrame implements ActionListener {
 
             add(btn);
             add(btn_2);
-
             pack();
             break;
         }
 
     }
 
-
-    //this is the method that runs when Swing registers an action on an element
-    //for which this class is an ActionListener
     public void actionPerformed(ActionEvent e) {
         Sounds sounds = new Sounds();
         sounds.playSound("click_x");
-        if (e.getActionCommand().equals("myButton")) {
-            start.setText("You have Selected: " + "Number Conversion");
-            try {
-                this.cd = new ConvertDialog();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        }
+        setButton(e.getActionCommand());
+    }
 
-        else if (e.getActionCommand().equals("myButton2")) {
-            start.setText("You have Selected: " + "View Conversion History");
+    private void setButton(String option) {
+            start.setText("You have Selected: " + option);
             try {
                 this.chj = new ConversionHistoryJText();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-        }
-
     }
 
 
