@@ -73,21 +73,16 @@ public class Conversion extends JFrame implements ActionListener {
 
     public void scanOption() {
         while (true) {
-
             start = new JLabel("\nSELECT YOUR OPTIONS");
             start.setBounds(190, 70, 500, 25);
             start.setFont(new Font("Serif", Font.BOLD, 18));
             this.add(start);
-
             JButton btn = new JButton("Number Conversion");
             btn.setFont(new Font("Serif", Font.BOLD, 15));
             JButton btn_2 = new JButton("View Conversion History");
             btn_2.setFont(new Font("Serif", Font.BOLD, 15));
-
             btn.setActionCommand("Conversion");
             btn_2.setActionCommand("Conversion History");
-
-
             btn.addActionListener(this);
             btn_2.addActionListener(this);
 

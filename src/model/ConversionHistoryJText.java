@@ -24,7 +24,7 @@ public class ConversionHistoryJText extends Component implements ActionListener 
     private JLabel title;
     private JTextArea area;
 
-    public ConversionHistoryJText() throws IOException {
+    ConversionHistoryJText() throws IOException {
         title = new JLabel("Conversion History");
         f = new JFrame();
         area = new JTextArea(10, 2);
@@ -43,10 +43,7 @@ public class ConversionHistoryJText extends Component implements ActionListener 
         clear.addActionListener(this);
         clear.setBounds(250, 400, 150, 30);
         f.add(clear);
-
         area.setFont(new Font("Aerial", 0, 5));
-
-
         area.setFont(new Font("Serif", Font.ITALIC, 16));
         area.setLineWrap(true);
         area.setWrapStyleWord(true);
@@ -55,13 +52,11 @@ public class ConversionHistoryJText extends Component implements ActionListener 
         title.setFont(new Font("Serif", Font.ITALIC, 20));
         Border border = BorderFactory.createBevelBorder(1, Color.black, Color.white);
         area.setBorder(border);
-
         BufferedImage myPicture = ImageIO.read(getClass().getResource("/model/picture/apartments.png"));
         Image scaleImage = new ImageIcon(myPicture).getImage().getScaledInstance(200, 130, Image.SCALE_DEFAULT);
         JLabel picLabel = new JLabel(new ImageIcon(scaleImage));
         picLabel.setBounds(140, 350, 200, 130);
         f.add(picLabel);
-
         f.setLayout(null);
         f.setVisible(true);
         f.setBounds(100, 250, 500, 500);
@@ -83,7 +78,7 @@ public class ConversionHistoryJText extends Component implements ActionListener 
     }
 
 
-    public static ArrayList<String> splitOnSpace(String line) {
+    private static ArrayList<String> splitOnSpace(String line) {
         String[] splits = line.split(" ");
         return new ArrayList<>(Arrays.asList(splits));
     }
