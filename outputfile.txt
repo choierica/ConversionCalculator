@@ -1,2 +1,1 @@
-2525meters 8282foot
-8282foot 2524.35meters
+13meters 42.64foot

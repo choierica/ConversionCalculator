@@ -1,9 +1,4 @@
 package ui;
-
-
-import exceptions.AnswerNotAcceptedException;
-import exceptions.NegativeNumberException;
-import exceptions.StringNotIdentifiedException;
 import model.Conversion;
 import java.io.IOException;
 
@@ -17,7 +12,7 @@ public class ConversionApp {
         c.scanOption();
     }
 
-    public static void main(String[] args) throws IOException, NegativeNumberException, AnswerNotAcceptedException, StringNotIdentifiedException {
+    public static void main(String[] args) throws IOException {
         ConversionApp ca = new ConversionApp();
         ca.start();
     }

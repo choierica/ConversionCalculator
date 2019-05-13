@@ -30,7 +30,8 @@ public class Conversion extends JFrame implements ActionListener {
         this.setPreferredSize(new Dimension(600, 400));
         ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
         setLayout(null);
-        playSound("Elevator-music");
+        Sounds sounds = new Sounds();
+        sounds.playSound("Elevator-music");
 
 
         BufferedImage myPicture = ImageIO.read(getClass().getResource("/model/picture/mathsymbol.png"));
@@ -39,8 +40,12 @@ public class Conversion extends JFrame implements ActionListener {
         JLabel picLabel = new JLabel(new ImageIcon(scaleImage));
         picLabel.setSize(600,400);
         setContentPane(picLabel);
+        displayText();
+        setVisible(true);
 
+    }
 
+    public void displayText()  throws IOException {
 
         try {
             String theURL = "https://www.ugrad.cs.ubc.ca/~cs210/2018w1/welcomemsg.html";
@@ -64,8 +69,6 @@ public class Conversion extends JFrame implements ActionListener {
                 br.close();
             }
         }
-        setVisible(true);
-
     }
 
     //REQUIRES:
@@ -108,7 +111,8 @@ public class Conversion extends JFrame implements ActionListener {
     //this is the method that runs when Swing registers an action on an element
     //for which this class is an ActionListener
     public void actionPerformed(ActionEvent e) {
-        playSound("click_x");
+        Sounds sounds = new Sounds();
+        sounds.playSound("click_x");
         if (e.getActionCommand().equals("myButton")) {
             start.setText("You have Selected: " + "Number Conversion");
             try {
@@ -127,23 +131,6 @@ public class Conversion extends JFrame implements ActionListener {
             }
         }
 
-    }
-
-    protected void playSound(String name) {
-        try {
-            URL url = this.getClass().getResource("/sounds/"+ name + ".wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        } catch (LineUnavailableException e1) {
-            e1.printStackTrace();
-        } catch (UnsupportedAudioFileException e1) {
-            e1.printStackTrace();
-        }
     }
 
 

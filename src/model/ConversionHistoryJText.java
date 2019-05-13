@@ -17,16 +17,17 @@ import java.util.Arrays;
 import java.util.List;
 
 
-
 public class ConversionHistoryJText extends Component implements ActionListener {
     private ConversionHistory ch = new ConversionHistory();
+    private Sounds sounds;
 
     public ConversionHistoryJText() throws IOException {
         JLabel title = new JLabel("Conversion History");
         JFrame f = new JFrame();
-        JTextArea area = new JTextArea(10,2);
+        JTextArea area = new JTextArea(10, 2);
+        sounds = new Sounds();
 
-        for(String string: load()){
+        for (String string : load()) {
             area.append(string);
         }
 
@@ -37,9 +38,7 @@ public class ConversionHistoryJText extends Component implements ActionListener 
         clear.setBounds(250, 400, 150, 30);
         f.add(clear);
 
-        area.setFont(new Font("Aerial", 0,5));
-
-
+        area.setFont(new Font("Aerial", 0, 5));
 
 
         area.setFont(new Font("Serif", Font.ITALIC, 16));
@@ -52,20 +51,19 @@ public class ConversionHistoryJText extends Component implements ActionListener 
         area.setBorder(border);
 
         BufferedImage myPicture = ImageIO.read(getClass().getResource("/model/picture/apartments.png"));
-        Image scaleImage = new ImageIcon(myPicture).getImage().getScaledInstance(200, 130,Image.SCALE_DEFAULT);
+        Image scaleImage = new ImageIcon(myPicture).getImage().getScaledInstance(200, 130, Image.SCALE_DEFAULT);
         JLabel picLabel = new JLabel(new ImageIcon(scaleImage));
-        picLabel.setBounds(140,350,200,130);
+        picLabel.setBounds(140, 350, 200, 130);
         f.add(picLabel);
 
         f.setLayout(null);
         f.setVisible(true);
-        f.setBounds(100,250,500,500);
+        f.setBounds(100, 250, 500, 500);
         f.add(area);
         f.add(title);
 
 
     }
-
 
 
     public List<String> load() throws IOException {
@@ -75,11 +73,10 @@ public class ConversionHistoryJText extends Component implements ActionListener 
             ArrayList<String> partsOfLine = splitOnSpace(line);
             System.out.print("The conversion of " + partsOfLine.get(0) + " ");
             System.out.println("is " + partsOfLine.get(1));
-            result.add("The conversion of " + partsOfLine.get(0) + " " + "is " + partsOfLine.get(1)+"\n");
+            result.add("The conversion of " + partsOfLine.get(0) + " " + "is " + partsOfLine.get(1) + "\n");
         }
         return result;
     }
-
 
 
     public static ArrayList<String> splitOnSpace(String line) {
@@ -89,11 +86,11 @@ public class ConversionHistoryJText extends Component implements ActionListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        playSound("click_x");
+        sounds.playSound("click_x");
         if (e.getActionCommand().equals("myButton")) {
             try {
                 ch.clear();
-                playSound("erro");
+                sounds.playSound("erro");
                 JOptionPane.showMessageDialog(this, "Are you sure you want to clear the history?", "Conversion history ", 1);
             } catch (IOException e1) {
                 e1.printStackTrace();
@@ -101,21 +98,4 @@ public class ConversionHistoryJText extends Component implements ActionListener 
         }
     }
 
-
-    protected void playSound(String name) {
-        try {
-            URL url = this.getClass().getResource("/sounds/"+ name + ".wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        } catch (LineUnavailableException e1) {
-            e1.printStackTrace();
-        } catch (UnsupportedAudioFileException e1) {
-            e1.printStackTrace();
-        }
-    }
 }
