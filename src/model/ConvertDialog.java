@@ -1,6 +1,11 @@
 package model;
 
 import exceptions.NegativeNumberException;
+import model.Interfaces.Units;
+import observer.ConversionObserver;
+import observer.Sound;
+import observer.Subject;
+import sun.tools.jconsole.Plotter;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
@@ -25,9 +30,14 @@ public class ConvertDialog extends JDialog implements ActionListener {
     private JButton ftom;
     private Convert convert = new Convert();
     private ConversionHistory ch = new ConversionHistory();
+    private Units selectedUnit;
+    private Subject subject = new Subject();
+
 
 
     public ConvertDialog() throws IOException {
+        Sound sound = new Sound();
+        subject.addObserver(sound);
 
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setPreferredSize(new Dimension(400, 200));
@@ -57,9 +67,6 @@ public class ConvertDialog extends JDialog implements ActionListener {
         picLabel.setBounds(0,5,100,30);
         add(picLabel);
         picLabel.setSize(100,300);
-
-
-
 
 
         meter = new JLabel("Meters");
@@ -103,10 +110,10 @@ public class ConvertDialog extends JDialog implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("mtof")) {
-
             try {
                 field_foot.setText(convert.meter(field_meter.getText()));
-                playSound("applause_y");
+                subject.notifyObservers("applause_y");
+//                playSound("applause_y");
             }
             catch (NumberFormatException e1) {
                 playSound("erro");
@@ -119,9 +126,9 @@ public class ConvertDialog extends JDialog implements ActionListener {
             try {
                 saveMeterFoot();
 
+            } catch (NegativeNumberException e1) {
+                e1.printStackTrace();
             }
-            catch (NumberFormatException e1) {}
-            catch (NegativeNumberException e1) {}
 
         } else if (e.getActionCommand().equals("ftom")) {
             try {
@@ -139,7 +146,6 @@ public class ConvertDialog extends JDialog implements ActionListener {
             try {
                 saveFootMeter();
             }
-            catch (NumberFormatException e1) {}
             catch (NegativeNumberException e1) {}
         }
 

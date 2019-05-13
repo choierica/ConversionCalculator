@@ -6,11 +6,11 @@ import java.net.URL;
 
 public class Sounds {
 
-    protected Sounds() {
+    public Sounds() {
 
     }
 
-    protected void playSound(String name) {
+    public void playSound(String name) {
         try {
             URL url = this.getClass().getResource("/sounds/"+ name + ".wav");
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);

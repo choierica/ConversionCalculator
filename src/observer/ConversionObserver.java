@@ -2,5 +2,5 @@ package observer;
 
 public interface ConversionObserver {
 
-    void update(ConversionObserver co);
+    void update(String s);
 }

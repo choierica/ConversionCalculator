@@ -14,9 +14,9 @@ public class Subject {
     }
 
 
-    public void notifyObservers(){
+    public void notifyObservers(String s){
         for (ConversionObserver observer : observers){
-            observer.update(observer);
+            observer.update(s);
         }
     }
 }

@@ -48,13 +48,13 @@ public class Conversion extends JFrame implements ActionListener {
     }
 
     public void displayText() throws IOException {
-
         try {
             String theURL = "https://www.ugrad.cs.ubc.ca/~cs210/2018w1/welcomemsg.html";
             URL url = new URL(theURL);
             br = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
             StringBuilder sb = new StringBuilder();
+
             while ((line = br.readLine()) != null) {
                 sb.append(line);
                 sb.append(System.lineSeparator());
@@ -66,16 +66,12 @@ public class Conversion extends JFrame implements ActionListener {
             web_label.setBorder(border);
             add(web_label);
         } finally {
-
             if (br != null) {
                 br.close();
             }
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:  scans the user input and reflects back to the user.
     public void scanOption() {
         while (true) {
 
@@ -116,10 +112,18 @@ public class Conversion extends JFrame implements ActionListener {
 
     private void setButton(String option) {
             start.setText("You have Selected: " + option);
-            try {
-                this.chj = new ConversionHistoryJText();
-            } catch (IOException e1) {
-                e1.printStackTrace();
+            if (option == "Conversion") {
+                try {
+                    this.cd = new ConvertDialog();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            } else {
+                try {
+                    this.chj = new ConversionHistoryJText();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
     }
 
