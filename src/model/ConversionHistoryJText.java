@@ -20,17 +20,23 @@ import java.util.List;
 public class ConversionHistoryJText extends Component implements ActionListener {
     private ConversionHistory ch = new ConversionHistory();
     private Sounds sounds;
+    private JFrame f;
+    private JLabel title;
+    private JTextArea area;
 
     public ConversionHistoryJText() throws IOException {
-        JLabel title = new JLabel("Conversion History");
-        JFrame f = new JFrame();
-        JTextArea area = new JTextArea(10, 2);
+        title = new JLabel("Conversion History");
+        f = new JFrame();
+        area = new JTextArea(10, 2);
         sounds = new Sounds();
-
         for (String string : load()) {
             area.append(string);
         }
 
+        setStyle();
+    }
+
+    private void setStyle() throws IOException {
         JButton clear = new JButton("Clear");
         clear.setFont(new Font("Serif", Font.BOLD, 15));
         clear.setActionCommand("myButton");
@@ -61,12 +67,10 @@ public class ConversionHistoryJText extends Component implements ActionListener 
         f.setBounds(100, 250, 500, 500);
         f.add(area);
         f.add(title);
-
-
     }
 
 
-    public List<String> load() throws IOException {
+    private List<String> load() throws IOException {
         List<String> lines = Files.readAllLines(Paths.get("outputfile.txt"));
         List<String> result = new ArrayList<>();
         for (String line : lines) {

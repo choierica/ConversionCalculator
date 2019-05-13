@@ -113,7 +113,6 @@ public class ConvertDialog extends JDialog implements ActionListener {
             try {
                 field_foot.setText(convert.meter(field_meter.getText()));
                 subject.notifyObservers("applause_y");
-//                playSound("applause_y");
             }
             catch (NumberFormatException e1) {
                 playSound("erro");
@@ -133,7 +132,7 @@ public class ConvertDialog extends JDialog implements ActionListener {
         } else if (e.getActionCommand().equals("ftom")) {
             try {
                 field_meter.setText(convert.foot(field_foot.getText()));
-                playSound("applause_y");
+                subject.notifyObservers("applause_y");
             }
             catch (NumberFormatException e1) {
                 playSound("erro");

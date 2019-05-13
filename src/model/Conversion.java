@@ -3,7 +3,6 @@ package model;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import javax.imageio.ImageIO;
-import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -111,20 +110,20 @@ public class Conversion extends JFrame implements ActionListener {
     }
 
     private void setButton(String option) {
-            start.setText("You have Selected: " + option);
-            if (option == "Conversion") {
-                try {
-                    this.cd = new ConvertDialog();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            } else {
-                try {
-                    this.chj = new ConversionHistoryJText();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+        start.setText("You have Selected: " + option);
+        if (option.equals("Conversion")) {
+            try {
+                this.cd = new ConvertDialog();
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
+        } else {
+            try {
+                this.chj = new ConversionHistoryJText();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
 
