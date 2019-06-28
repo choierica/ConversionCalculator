@@ -42,33 +42,7 @@ public class Conversion extends JFrame implements ActionListener {
         JLabel picLabel = new JLabel(new ImageIcon(scaleImage));
         picLabel.setSize(600, 400);
         setContentPane(picLabel);
-        displayText();
         setVisible(true);
-    }
-
-    public void displayText() throws IOException {
-        try {
-            String theURL = "https://www.ugrad.cs.ubc.ca/~cs210/2018w1/welcomemsg.html";
-            URL url = new URL(theURL);
-            br = new BufferedReader(new InputStreamReader(url.openStream()));
-            String line;
-            StringBuilder sb = new StringBuilder();
-
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-            }
-            web_label = new JLabel(String.valueOf(sb));
-            web_label.setBounds(100, 25, 415, 30);
-            web_label.setFont(new Font("Serif", Font.BOLD, 20));
-            Border border = BorderFactory.createBevelBorder(1, Color.black, Color.white);
-            web_label.setBorder(border);
-            add(web_label);
-        } finally {
-            if (br != null) {
-                br.close();
-            }
-        }
     }
 
     public void scanOption() {
